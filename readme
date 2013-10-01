@@ -1,0 +1,6 @@
+
+All the directories are tests, but:
+- kinect_lines_blue, users' skeletons rotate a matrix of helix.
+- kinect_random_shapes, right hand of each user creates bubbles with random shapes, colors and alphas in the direction and velocity of the movement of the hand.
+- kinect_noche_investigadores, its a mixture of both described above.
+
