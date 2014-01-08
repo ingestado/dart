@@ -4,6 +4,9 @@ int fin = 0;
 int primero = 1;
 int par = 1;
 int cuenta = 0;
+int cuenta2 = 0;
+int cuenta3 = 0;
+int act = 1;
 int finif = 0;
 int cantidad = 0;
 
@@ -20,9 +23,22 @@ void setup(){
 }
 
 void draw(){
-  if (cuenta==3){
+  
+  if (cuenta2 == 50){
+    cuenta2 = 0;
+    act = 1;
+  }
+  else { 
+    cuenta2++;
+    if(cuenta3 == 3){
+    cuenta3=0;
     fill(0,0,0,50);
     rect(-1,-1,width+1,height+1);
+    }
+  }
+  
+  if (cuenta>3 && act==1){
+    
     for (int i = 0; i < 14; i++) {
       for (int j = 0; j < 2; j++) {
           print(rayo[i][j] + " , ");
@@ -51,8 +67,11 @@ void draw(){
             float num2 = random(40,100);
             println("float num2: " + num2);
             rayo[w][1] = rayo[w-1][1] + int(num2); 
-            if(w==13) {rayo[w][1]=height+50;
-                fin = 1;}
+            if(w==13) {
+              rayo[w][1]=height+50;
+              fin = 1;
+              act = 0;
+            }
            finif = 1;
           }
           else{
@@ -64,9 +83,12 @@ void draw(){
             float num2 = random(40,100);
             println("floaaaat num2: " + num2);
             rayo[w][1] = rayo[w-1][1] + int(num2);
-            if(w==13) {rayo[w][1]=height+50;
-                fin = 1;} 
-             finif = 1;
+            if(w==13) {
+              rayo[w][1]=height+50;
+              fin = 1;
+              act = 0;
+            } 
+            finif = 1;
           }
         } 
       }
@@ -82,6 +104,7 @@ void draw(){
         case 1:
         
           stroke(255);
+          noFill();
           beginShape();
           curveVertex(rayo[0][0], rayo[0][1]); 
           curveVertex(rayo[1][0], rayo[1][1]); 
@@ -91,6 +114,7 @@ void draw(){
         case 2:
         
           stroke(255);
+          noFill();
           beginShape();
           curveVertex(rayo[0][0], rayo[0][1]); 
           curveVertex(rayo[1][0], rayo[1][1]); 
@@ -101,6 +125,7 @@ void draw(){
         case 3:
         
           stroke(255);
+          noFill();
           beginShape();
           curveVertex(rayo[0][0], rayo[0][1]); 
           curveVertex(rayo[1][0], rayo[1][1]); 
@@ -112,6 +137,7 @@ void draw(){
         case 4:
         
           stroke(255);
+          noFill();
           beginShape();
           curveVertex(rayo[0][0], rayo[0][1]); 
           curveVertex(rayo[1][0], rayo[1][1]); 
@@ -124,6 +150,7 @@ void draw(){
         case 5:
         
           stroke(255);
+          noFill();
           beginShape();
           curveVertex(rayo[0][0], rayo[0][1]); 
           curveVertex(rayo[1][0], rayo[1][1]); 
@@ -137,6 +164,7 @@ void draw(){
         case 6:
         
           stroke(255);
+          noFill();
           beginShape();
           curveVertex(rayo[0][0], rayo[0][1]); 
           curveVertex(rayo[1][0], rayo[1][1]); 
@@ -151,6 +179,7 @@ void draw(){
         case 7:
         
           stroke(255);
+          noFill();
           beginShape();
           curveVertex(rayo[0][0], rayo[0][1]); 
           curveVertex(rayo[1][0], rayo[1][1]); 
@@ -166,6 +195,7 @@ void draw(){
         case 8:
         
           stroke(255);
+          noFill();
           beginShape();
           curveVertex(rayo[0][0], rayo[0][1]); 
           curveVertex(rayo[1][0], rayo[1][1]); 
@@ -182,6 +212,7 @@ void draw(){
         case 9:
         
           stroke(255);
+          noFill();
           beginShape();
           curveVertex(rayo[0][0], rayo[0][1]); 
           curveVertex(rayo[1][0], rayo[1][1]); 
@@ -199,6 +230,7 @@ void draw(){
         case 10:
         
           stroke(255);
+          noFill();
           beginShape();
           curveVertex(rayo[0][0], rayo[0][1]); 
           curveVertex(rayo[1][0], rayo[1][1]); 
@@ -217,6 +249,7 @@ void draw(){
         case 11:
         
           stroke(255);
+          noFill();
           beginShape();
           curveVertex(rayo[0][0], rayo[0][1]); 
           curveVertex(rayo[1][0], rayo[1][1]); 
@@ -236,6 +269,7 @@ void draw(){
         case 12:
         
           stroke(255);
+          noFill();
           beginShape();
           curveVertex(rayo[0][0], rayo[0][1]); 
           curveVertex(rayo[1][0], rayo[1][1]); 
@@ -256,6 +290,7 @@ void draw(){
         case 13:
         
           stroke(255);
+          noFill();
           beginShape();
           curveVertex(rayo[0][0], rayo[0][1]); 
           curveVertex(rayo[1][0], rayo[1][1]); 
@@ -275,6 +310,10 @@ void draw(){
           break;
 
       }
+      if(cantidad==12){
+        fill(255);
+        rect(0,0,width,height);
+      }
       cantidad=0;
       println("parapachun pachun pin pum");
     }
@@ -291,6 +330,7 @@ void draw(){
     }
   }
   }
+cuenta3++;
 cuenta++; 
 finif = 0;
 }
