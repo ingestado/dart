@@ -8,8 +8,8 @@ int kinectHeight = 480;
 float reScale;
 int clickedDepth,clickPosition;
 int maxValue;
-int transparencia=3;
-int cuenta_tiempo=0;
+int[] depthValues2;
+int[] depthValues;
 
 void setup(){
   size (1280, 720);
@@ -27,7 +27,8 @@ void setup(){
   kinect.enableDepth();
   
   maxValue = 2500;
-  
+  depthValues2 = kinect.depthMap();
+  depthValues = kinect.depthMap();
 }
 
 
@@ -35,26 +36,38 @@ void draw()
 {
   // update the cam
   kinect.update();
-  fill(0,0,0,transparencia);
+  fill(0,0,0,35);
   rect(0,0,width,height);
   
-  cuenta_tiempo++;
-  if (cuenta_tiempo ==  50){
-    transparencia++;
-    cuenta_tiempo=0;
-    println(transparencia);}
-
   PImage cam = createImage(640,480,RGB);
+  
 
-  int[] depthValues = kinect.depthMap();  //Save the Depth's values in an array
+  depthValues2 = depthValues;
+
+  
   cam.loadPixels();
+  for(int x = 0; x < 640; x++){           //See all the pixels
+    for(int y = 0; y < 480; y++){
+      clickPosition = x + (y*640);        //We see which pixel we are working on
+      clickedDepth = depthValues2[clickPosition];    //See the pixel's value 
+      if (clickedDepth > 455){
+      if (maxValue > clickedDepth){
+        cam.pixels[ clickPosition] = color(0, 200, 0);}
+      }
+    }
+  }
+
+
+  depthValues = kinect.depthMap();  //Save the Depth's values in an array
+  
   for(int x = 0; x < 640; x++){           //See all the pixels
     for(int y = 0; y < 480; y++){
       clickPosition = x + (y*640);        //We see which pixel we are working on
       clickedDepth = depthValues[clickPosition];    //See the pixel's value 
       if (clickedDepth > 455){
       if (maxValue > clickedDepth){
-        cam.pixels[ clickPosition] = color(0, 200, 0);}}
+        cam.pixels[ clickPosition] = color(0);}
+      }
     }
   }
   cam.updatePixels();
