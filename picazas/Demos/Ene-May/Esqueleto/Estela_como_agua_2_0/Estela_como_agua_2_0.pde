@@ -1,21 +1,19 @@
+
 import SimpleOpenNI.*;
 SimpleOpenNI kinect;
 
-
+PVector jointPosE = new PVector(0,0,0);
+PVector jointPosP = new PVector(0,0,0);
 int kinectWidth = 640;
 int kinectHeight = 480;
 // to center and rescale from 640x480 to higher custom resolutions
 float reScale;
 int clickedDepth,clickPosition;
-PVector jointPos = new PVector(0,0,0);
-int cuenta2=0;
-color c = color(255);
 int maxValue=2500;
-PVector p= new PVector (0,0);      //Create a vector to save the pixel's position
 
 void setup(){
   size(1000,650);
-  background(0);
+  background(0,255,0);
   kinect= new SimpleOpenNI(this);
   reScale = (float) width / kinectWidth;
     
@@ -28,8 +26,8 @@ void setup(){
   kinect.setMirror(true);
   kinect.enableDepth();
   kinect.enableUser();
-}
 
+}
 
 void draw(){
   
@@ -38,56 +36,50 @@ void draw(){
   int[] userList = kinect.getUsers();
   // find out which pixels have users in them
   PImage cam = createImage(640,480,RGB);
-  fill(0);
-  rect(0,0,width, height);
   
-   for(int i=0;i<userList.length;i++)
+  for(int i=0;i<userList.length;i++)
  {
    int userId = userList [i];
    
-  kinect.getJointPositionSkeleton(userId,SimpleOpenNI.SKEL_NECK,jointPos);
-  println("Neck:"+jointPos);
+  kinect.getJointPositionSkeleton(userId,SimpleOpenNI.SKEL_NECK,jointPosP);
+  println("Neck:"+jointPosP);
       
 }
-  jointPos.x = (jointPos.x + 1000)/2;
-  jointPos.y = (jointPos.y - 570)/(-1.75);
   
-  for ( int h=0; h<20; h++){
-    stroke(c);
-    line(jointPos.x,jointPos.y,random(-50,width+50),random(-50,0));
-    stroke(c);
-    line(jointPos.x,jointPos.y,random(-50,width+50),random(height,height+50));
-    stroke(c);
-    line(jointPos.x,jointPos.y,random(-50,0),random(-50,height+50));
-    stroke(c);
-    line(jointPos.x,jointPos.y,random(width,width+50),random(-50,height+50));
-  }
+  jointPosE.x = jointPosP.x;
+  jointPosE.y = jointPosP.y;
   
-   if (kinect.getNumberOfUsers() > 0) { 
-
-    p.x=0;
-    p.y=0;
-    // populate the pixels array
-    // from the sketch's current contents
     cam.loadPixels(); 
     for(int x = 0; x < 640; x++){           //See all the pixels
-    for(int y = 0; y < 480; y++){
+      for(int y = 0; y < 480; y++){
       clickPosition = x + (y*640);        //We see which pixel we are working on
       clickedDepth = depthValues[clickPosition];    //See the pixel's value 
-      if (clickedDepth > 455){
-      if (maxValue > clickedDepth){
-        cam.pixels[ clickPosition] = color(0, 255, 0);}}
+        if (clickedDepth > 455){
+        if (maxValue > clickedDepth){
+          cam.pixels[ clickPosition] = color(255);}
+        else cam.pixels[ clickPosition] = color(0,255,0);
+        }
+      }
     }
-  }
-    
     // display the changed pixel array
     cam.updatePixels(); 
+    translate(0, (height-kinectHeight*reScale)/2);
+    scale(reScale);
+    image(cam,0,0); 
+    fill(0,255,0,10);
+    rect(0,0,width, height);
+  
+  for ( int h=0; h<20; h++){
+    stroke(255,0,0);
+    line(jointPosE.x,0,random(-50,width+50),random(-50,0));
+    stroke(255,0,0);
+    line(jointPosE.x,0,random(-50,width+50),random(height,height+50));
+    stroke(255,0,0);
+    line(jointPosE.x,0,random(-50,0),random(-50,height+50));
+    stroke(255,0,0);
+    line(jointPosE.x,0,random(width,width+50),random(-50,height+50));
   }
 
-  translate(0, (height-kinectHeight*reScale)/2);
-  scale(reScale);
-  image(cam,0,0); 
-  
 }
 
 void onNewUser(SimpleOpenNI curContext, int userId)

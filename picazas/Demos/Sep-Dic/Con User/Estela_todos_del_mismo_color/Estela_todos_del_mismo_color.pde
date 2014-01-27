@@ -1,5 +1,5 @@
-import SimpleOpenNI.*;
 
+import SimpleOpenNI.*;
 SimpleOpenNI kinect;
 
 int cuenta=0;
@@ -16,6 +16,7 @@ void setup(){
    return; 
   }
   
+  kinect.setMirror(true);
   kinect.enableDepth();
   kinect.enableUser();
   
@@ -58,3 +59,20 @@ void draw(){
   ellipse(jointPos.x,jointPos.y,20,20);
 }
 
+void onNewUser(SimpleOpenNI curContext, int userId)
+{
+  println("onNewUser - userId: " + userId);
+  println("\tstart tracking skeleton");
+  
+  curContext.startTrackingSkeleton(userId);
+}
+
+void onLostUser(SimpleOpenNI curContext, int userId)
+{
+  println("onLostUser - userId: " + userId);
+}
+
+void onVisibleUser(SimpleOpenNI curContext, int userId)
+{
+  //println("onVisibleUser - userId: " + userId);
+}

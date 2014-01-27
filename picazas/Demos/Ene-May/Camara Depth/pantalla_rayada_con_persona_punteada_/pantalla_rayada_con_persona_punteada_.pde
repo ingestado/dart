@@ -6,11 +6,18 @@ int cuentay=0;
 int cuentaYTotal=0;
 int cuentapos=0;
 int position=-1;
+int kinectWidth = 640;
+int kinectHeight = 480;
+int clickedDepth,clickPosition;
+int maxValue;
+float reScale;
 
 void setup(){
   size(640,480,P3D);
   background(255);
   kinect= new SimpleOpenNI(this);
+ 
+  reScale = (float) width / kinectWidth;
   
   if (kinect.isInit()==false){
    println("Nada de nada chato");
@@ -18,12 +25,16 @@ void setup(){
    return; 
   }
   
-  kinect.enableDepth();
+  kinect.setMirror(true);
+  kinect.enableDepth();  
+  maxValue = 2400;
   kinect.enableUser();  
 }
 
 void draw(){
   kinect.update();
+  int[] depthValues = kinect.depthMap();
+  PImage cam = createImage(640,480,RGB);
   
   if(cuentapos==2){
     
@@ -53,7 +64,7 @@ void draw(){
 
     // populate the pixels array
     // from the sketch's current contents
-    loadPixels(); 
+    cam.loadPixels(); 
     
     for (int y = 0; y < 479; y++) { 
       if(cuentay==5){cuentay=0;}
@@ -71,7 +82,10 @@ void draw(){
     }
     cuentaYTotal=0;
     // display the changed pixel array
-    updatePixels(); 
+    cam.updatePixels(); 
+    translate(0, (height-kinectHeight*reScale)/2);
+    scale(reScale);
+    image(cam,0,0);
   }
   
 }
@@ -105,3 +119,16 @@ void keyPressed()
   }
 }
 
+void keyPressed(){
+  
+  println("MaxValue: " + maxValue);
+  switch(key)
+  {
+  case 'q':
+    maxValue+=100;
+    break;
+  case 'a':
+    maxValue-=100;
+    break;
+  }  
+}
