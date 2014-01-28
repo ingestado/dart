@@ -43,6 +43,7 @@ void setup(){
 }
 
 void draw(){
+  println("aaaa");
   
   kinect.update();
   int[] depthValues = kinect.depthMap();
@@ -55,7 +56,7 @@ void draw(){
       clickedDepth = depthValues[clickPosition];    //See the pixel's value 
       if (clickedDepth > 455){
       if (maxValue > clickedDepth){
-        cam.pixels[ clickPosition] = color(0);}}
+        cam.pixels[ clickPosition] = color(120,0,0);}}
     }
   }
   cam.updatePixels();
@@ -370,8 +371,6 @@ translate(0, (height-kinectHeight*reScale)/2);
 scale(reScale);
 image(cam,0,0);
 
-    }
-  
 finif = 0;
 }
 
