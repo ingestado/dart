@@ -18,11 +18,11 @@ void setup(){
   reScale = (float) width / kinectWidth;
   maxValue = 2500;
   
-  /*if (kinect.isInit()==false){
+  if (kinect.isInit()==false){
    println("Conectame por favor");
    exit();
    return; 
-  }*/
+  }
 
   kinect = new SimpleOpenNI(this);
   kinect.enableDepth();
