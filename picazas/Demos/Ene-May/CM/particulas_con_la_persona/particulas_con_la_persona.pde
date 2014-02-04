@@ -40,7 +40,7 @@ void setup(){
 }
 
 void draw(){
-  println("FUNCIONA");
+  //println("FUNCIONA");
   kinect.update();
   IntVector userList = new IntVector();
   kinect.getUsers(userList);
@@ -65,22 +65,22 @@ void draw(){
       if(iniciar[i][k] == 0){
         x[i][k] = int(jointPos.x);
         y[i][k] = int(jointPos.y);
-        vx[i][k] = int(random(3,10))*((-1)*int(random(1,3)));
-        vy[i][k] = int(random(3,10))*((-1)*int(random(1,3)));
+        vx[i][k] = int(random(3,5))*((-1)*int(random(1,3)));
+        vy[i][k] = int(random(3,5))*((-1)*int(random(1,3)));
         iniciar[i][k] = 1;
       }
       
-      if(x[i][k]+1 > jointPos.x+150){
-        vx[i][k] = int(random(3,10))*(-1);
+      if(x[i][k]+1 > jointPos.x+100){
+        vx[i][k] = int(random(3,5))*(-1);
       }
-      else if(x[i][k]-1 < jointPos.x-150){
-        vx[i][k] = int(random(3,10));
+      else if(x[i][k]-1 < jointPos.x-100){
+        vx[i][k] = int(random(3,5));
       }
-      else if(y[i][k]+1 > jointPos.y+150){
-        vy[i][k] = int(random(3,10))*(-1);
+      else if(y[i][k]+1 > jointPos.y+100){
+        vy[i][k] = int(random(3,5))*(-1);
       }
-      else if(y[i][k]-1 < jointPos.y-150){
-        vy[i][k] = int(random(3,10));
+      else if(y[i][k]-1 < jointPos.y-100){
+        vy[i][k] = int(random(3,5));
       }
     }
   }

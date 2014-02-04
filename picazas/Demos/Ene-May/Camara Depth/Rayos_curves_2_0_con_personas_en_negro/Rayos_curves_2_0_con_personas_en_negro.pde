@@ -17,7 +17,7 @@ float reScale;
 
 
 void setup(){
-  size(1000,650);
+  size(1000,650,P3D);
   background(0);
   kinect= new SimpleOpenNI(this);
   reScale = (float) width / kinectWidth;
