@@ -39,17 +39,11 @@ void draw(){
   
   if (cuenta>3 && act==1){
     
-    for (int i = 0; i < 14; i++) {
-      for (int j = 0; j < 2; j++) {
-          print(rayo[i][j] + " , ");
-        }
-    }
     cuenta=0;
   if(fin==0){
     if (primero==1){
       primero = 0; 
       float numero = random(0,width); 
-      println("float numero: " + numero); 
       rayo[0][0] = int(numero);
       rayo[0][1] = -150;
     }
@@ -61,11 +55,9 @@ void draw(){
           if(par==1){ 
             par = 0;
             float num = random(0,30);
-            println("float num: " + num);
             rayo[w][0] = rayo[w-1][0] + int(num);
             if(rayo[w][0]>width) {rayo[w][0]=width;}
             float num2 = random(40,100);
-            println("float num2: " + num2);
             rayo[w][1] = rayo[w-1][1] + int(num2); 
             if(w==13) {
               rayo[w][1]=height+50;
@@ -77,12 +69,10 @@ void draw(){
           else{
             par = 1;
             float num = random(-30,0);
-            println("floaaaat num: " + num);
             rayo[w][0] = rayo[w-1][0] + int(num);
             if(rayo[w][0]>width) {rayo[w][0]=2;}
             float num2 = random(40,100);
-            println("floaaaat num2: " + num2);
-            rayo[w][1] = rayo[w-1][1] + int(num2);
+                rayo[w][1] = rayo[w-1][1] + int(num2);
             if(w==13) {
               rayo[w][1]=height+50;
               fin = 1;
@@ -315,7 +305,6 @@ void draw(){
         rect(0,0,width,height);
       }
       cantidad=0;
-      println("parapachun pachun pin pum");
     }
     }    
    }
