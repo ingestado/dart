@@ -60,8 +60,8 @@ void draw()
   translate(0, (height-kinectHeight*reScale)/2);
   scale(reScale);
   if(activarRGB == 0) {//image(camRGB,XRGB,YRGB);
-  XRGB +=20;
-  YRGB -=20;
+  XRGB +=2;
+  YRGB -=2;
   //activarRGB = 1;
 }
   image(camRGB,XRGB,YRGB);

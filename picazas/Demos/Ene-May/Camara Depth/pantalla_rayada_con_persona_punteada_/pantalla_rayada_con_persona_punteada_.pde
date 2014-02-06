@@ -66,11 +66,11 @@ void draw(){
     // from the sketch's current contents
     cam.loadPixels(); 
     
-    for (int y = 0; y < 479; y++) { 
+    for (int y = 0; y < height; y++) { 
       if(cuentay==5){cuentay=0;}
       else{cuentay++;}
       cuentaYTotal++;
-      for (int x = 0; x < 639; x++) { 
+      for (int x = 0; x < width; x++) { 
       int i= x + x*cuentaYTotal;
         if(userMap[i] != 0){           // if the current pixel is on a user
           if (cuentay==5) {
