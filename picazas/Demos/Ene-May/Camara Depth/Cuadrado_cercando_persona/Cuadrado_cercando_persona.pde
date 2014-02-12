@@ -15,7 +15,7 @@ float reScale;
 int clickedDepth,clickPosition;
 
 void setup(){
-  size(1000,600,P2D);
+  size(1280,960,P3D);
   background(0);
   reScale = (float) width / kinectWidth;
    
@@ -26,9 +26,7 @@ void setup(){
 }
 
 void draw(){
-  fill(0);
-  rect(0,0,width,height);
-  
+  background(0);
   min.x = width;
   min.y = height;
   max.x = 0;
@@ -71,7 +69,11 @@ void draw(){
   }
 
     stroke(255);
-    rect(min.x,min.y,max.x,max.y);
+    line(min.x,min.y,min.x,max.y);
+    line(min.x,min.y,max.x,min.y);
+    line(max.x,min.y,max.x,max.y);
+    /*noFill();
+    rect(min.x,min.y,max.x,max.y);*/
     println("coor: " + min.x + " , " + min.y + " , " + max.x + " , " + max.y );
 }
 
