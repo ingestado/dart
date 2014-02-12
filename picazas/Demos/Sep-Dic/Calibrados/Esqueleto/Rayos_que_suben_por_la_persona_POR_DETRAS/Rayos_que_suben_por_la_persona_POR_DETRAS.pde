@@ -46,17 +46,17 @@ void draw(){
   rect(0,0,width, height);
   
    for(int i=0;i<userList.length;i++)
- {
-   int userId = userList [i];
-   
-  kinect.getJointPositionSkeleton(userId,SimpleOpenNI.SKEL_NECK,jointPos);
-  kinect.getJointPositionSkeleton(userId,SimpleOpenNI.SKEL_LEFT_HAND,jointPosLH);
-  kinect.getJointPositionSkeleton(userId,SimpleOpenNI.SKEL_RIGHT_HAND,jointPosRH);
-  println("Neck:"+jointPos);
-  println("left hand:" + jointPosLH);
-  println("Right hand:" + jointPosRH);
-      
-}
+     {
+       int userId = userList [i];
+       
+      kinect.getJointPositionSkeleton(userId,SimpleOpenNI.SKEL_NECK,jointPos);
+      kinect.getJointPositionSkeleton(userId,SimpleOpenNI.SKEL_LEFT_HAND,jointPosLH);
+      kinect.getJointPositionSkeleton(userId,SimpleOpenNI.SKEL_RIGHT_HAND,jointPosRH);
+      println("Neck:"+jointPos);
+      println("left hand:" + jointPosLH);
+      println("Right hand:" + jointPosRH);
+          
+    }
 
   if(goUp == 0){
     if(jointPosLH.x < 0 && jointPosLH.y >0 && jointPosRH.x > 0 && jointPosRH.y >0){ 

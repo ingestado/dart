@@ -1,5 +1,5 @@
-import SimpleOpenNI.*;
 
+import SimpleOpenNI.*;
 SimpleOpenNI kinect;
 
 int kinectWidth = 640;

@@ -40,8 +40,10 @@ void draw()
       clickPosition = x + (y*640);        //We see which pixel we are working on
       clickedDepth = depthValues[clickPosition];    //See the pixel's value 
       if (clickedDepth > 455){
-      if (maxValue > clickedDepth){
-        cam.pixels[ clickPosition] = color(0, 200, 0);}}
+        if (maxValue > clickedDepth){
+          cam.pixels[ clickPosition] = color(0, 200, 0);
+        }
+      }
     }
   }
   cam.updatePixels();
