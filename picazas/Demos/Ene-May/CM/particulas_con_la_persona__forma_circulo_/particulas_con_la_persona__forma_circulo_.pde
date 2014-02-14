@@ -1,3 +1,4 @@
+
 import SimpleOpenNI.*;
 SimpleOpenNI kinect;
 
@@ -14,7 +15,7 @@ float reScale;
 
 void setup(){
   size(1000,600);
-  background(0);
+  background(255);
   reScale = (float) width / kinectWidth;
   
   for(int r=0; r<6; r++){
@@ -44,7 +45,7 @@ void draw(){
   kinect.update();
   int[] userList = kinect.getUsers();
   
-  fill(255,255,255,35);
+  fill(255,255,255,20);
   rect(0,0,width,height);
   
   
@@ -69,22 +70,26 @@ void draw(){
         iniciar[i][k] = 1;
       }
       
-      if(x[i][k]+1 > jointPos.x+100){
-        vx[i][k] = int(random(3,5))*(-1);
-       // vx[i][k] = -1;
+      for(int s=0; s<360; s++){
+        float q = jointPos.x + 100*cos(radians(s));
+        float w = jointPos.y + 100*sin(radians(s));
+        int q2 = int(q);
+        int w2 = int(w);
+
+        if(x[i][k]+1 > q2){
+          vx[i][k] = int(random(3,5))*(-1);
+        }
+        else if(x[i][k]-1 < q2){
+          vx[i][k] = int(random(3,5));
+        }
+        else if(y[i][k]+1 > w2){
+          vy[i][k] = int(random(3,5))*(-1);
+        }
+        else if(y[i][k]-1 < w2){
+          vy[i][k] = int(random(3,5));
+        }
       }
-      else if(x[i][k]-1 < jointPos.x-100){
-        vx[i][k] = int(random(3,5));
-      // vx[i][k] = 1;
-      }
-      else if(y[i][k]+1 > jointPos.y+100){
-        vy[i][k] = int(random(3,5))*(-1);
-       //vy[i][k] = -1;
-      }
-      else if(y[i][k]-1 < jointPos.y-100){
-        vy[i][k] = int(random(3,5));
-       // vy[i][k] = 1;
-      }
+      
     }
   }
 }
