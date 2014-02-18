@@ -66,17 +66,17 @@ void draw(){
     // from the sketch's current contents
     cam.loadPixels(); 
     
-    for (int y = 0; y < height; y++) { 
+    for (int y = 0; y < 480; y++) { 
       if(cuentay==5){cuentay=0;}
       else{cuentay++;}
       cuentaYTotal++;
-      for (int x = 0; x < width; x++) { 
+      for (int x = 0; x < 640; x++) { 
       int i= x + x*cuentaYTotal;
         if(userMap[i] != 0){           // if the current pixel is on a user
           if (cuentay==5) {
             // make it green
-            pixels[i] = color(0, 255, 0); //The color you want for all pleople
-          }else {pixels[i] = color(0, 0, 255);}
+            cam.pixels[i] = color(0, 255, 0); //The color you want for all pleople
+          }else {cam.pixels[i] = color(0, 0, 255);}
         } 
       }
     }
@@ -108,17 +108,6 @@ void onVisibleUser(SimpleOpenNI curContext, int userId)
   //println("onVisibleUser - userId: " + userId);
 }
 
-
-void keyPressed()
-{
-  switch(key)
-  {
-  case ' ':
-    kinect.setMirror(!kinect.mirror());
-    break;
-  }
-}
-
 void keyPressed(){
   
   println("MaxValue: " + maxValue);
@@ -129,6 +118,9 @@ void keyPressed(){
     break;
   case 'a':
     maxValue-=100;
+    break;
+  case ' ':
+    kinect.setMirror(!kinect.mirror());
     break;
   }  
 }
