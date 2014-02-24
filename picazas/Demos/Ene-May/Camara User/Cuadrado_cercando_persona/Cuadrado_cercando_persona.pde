@@ -15,7 +15,7 @@ float reScale;
 int clickedDepth,clickPosition;
 
 void setup(){
-  size(1280,960,P3D);
+  size(900,600,P3D);
   background(0);
   reScale = (float) width / kinectWidth;
    

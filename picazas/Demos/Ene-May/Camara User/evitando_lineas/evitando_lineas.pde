@@ -3,13 +3,13 @@ import SimpleOpenNI.*;
 SimpleOpenNI kinect;
 
 
-int[][] lines;
+int[][] lines;                  
+PVector min = new PVector{0,0,0};    
+PVector max = new PVector{0,0,0};
 int c;
 int nLines = 150;
 PVector position = new PVector();
 PVector jointPos = new PVector(0,0,0);
-PVector min = new PVector(0,0,0);
-PVector max = new PVector(0,0,0);
 int kinectWidth = 640;
 int kinectHeight = 480;
 int tipe = 0;
@@ -40,10 +40,12 @@ void draw(){
   int[] userMap = kinect.userMap();
   PImage cam = createImage(640,480,RGB);
   
-   min.x = width;
-   min.y = height;
-   max.x = 0;
-   max.y = 0;
+  for(int s=0; s<6; s++){
+     min[s][0] = width;
+     min[s][1] = height;
+     max[s][0] = 0;
+     max[s][1] = 0;
+  }
       
    if (kinect.getNumberOfUsers() > 0) {
        cam.loadPixels(); 
@@ -68,6 +70,9 @@ void draw(){
                }
            }
           }
+          
+          
+          
         }
         cam.updatePixels();
         translate(0, (height-kinectHeight*reScale)/2);
@@ -136,4 +141,5 @@ void draw(){
     println(mouseX+" ; "+mouseY);
   }
 }
+
 
