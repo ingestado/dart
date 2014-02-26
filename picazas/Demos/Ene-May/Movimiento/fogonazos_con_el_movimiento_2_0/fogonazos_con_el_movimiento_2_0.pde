@@ -17,7 +17,7 @@ int maxValue;
 void setup(){
   size (800, 500,P3D);
   kinect= new SimpleOpenNI(this);
-  background(0);
+  background(255);
   reScale = (float) width / kinectWidth;
   
   if (kinect.isInit()==false){

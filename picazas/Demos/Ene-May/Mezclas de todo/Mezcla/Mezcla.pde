@@ -3,7 +3,7 @@ import SimpleOpenNI.*;
 SimpleOpenNI kinect;
 
 PVector position = new PVector(0,0,0);
-PVector jointPos = new PVector(0,0,0);
+PVector jointPos = new PVector(600,400,0);
 PVector jointPosLH = new PVector(0,0,0);
 PVector jointPosRH = new PVector(0,0,0);
 PVector p= new PVector (0,0);
@@ -53,24 +53,7 @@ void draw(){
     
     case 0:
       background(0);
-      depthValues = kinect.depthMap();
-      cam.loadPixels();
-      for(int x = 0; x < 640; x++){           //See all the pixels
-        for(int y = 0; y < 480; y++){
-          clickPosition = x + (y*640);        //We see which pixel we are working on
-          clickedDepth = depthValues[clickPosition];    //See the pixel's value 
-          if (clickedDepth > 455){
-            if (maxValue > clickedDepth){
-              cam.pixels[ clickPosition] = color(0, 200, 0);
-            }
-          }
-        }
-      }
-      cam.updatePixels();
-      translate(0, (height-kinectHeight*reScale)/2);
-      scale(reScale);
-      image(cam,0,0);
-      
+            
       for (int z=0; z<userList.length; z++){
         
         int userId = userList[z];           //getting user data    
@@ -89,7 +72,7 @@ void draw(){
           }
         }
       }
-      if(jointPos.x>width*9/10){ part++;}
+      if(jointPos.x<width/10){ part++;}
       break;
       
     case 1:
@@ -101,9 +84,11 @@ void draw(){
           clickPosition = x + (y*640);        //We see which pixel we are working on
           clickedDepth = depthValues[clickPosition];    //See the pixel's value 
           if (clickedDepth > 455){
-          if (maxValue > clickedDepth){
-            cuentaPixels++;
-            cam.pixels[ clickPosition] = color(0);}}
+            if (maxValue > clickedDepth){
+              cuentaPixels++;
+              cam.pixels[ clickPosition] = color(0);
+            }
+          }
         }
       }
       cam.updatePixels();
@@ -146,11 +131,11 @@ void draw(){
           kinect.getJointPositionSkeleton(userId,SimpleOpenNI.SKEL_NECK,jointPos);
           kinect.getJointPositionSkeleton(userId,SimpleOpenNI.SKEL_LEFT_HAND,jointPosLH);
           kinect.getJointPositionSkeleton(userId,SimpleOpenNI.SKEL_RIGHT_HAND,jointPosRH);
-          println("CM:"+jointPos);
+          println("Neck:"+jointPos);
           println("left hand:" + jointPosLH);
           println("Right hand:" + jointPosRH);
               
-        }
+        
   
       if(goUp == 0){
         if(jointPosLH.x < 0 && jointPosLH.y >0 && jointPosRH.x > 0 && jointPosRH.y >0){ 
@@ -161,9 +146,17 @@ void draw(){
       if(goUp == 1){
         move+=10;
       }
-    
-      jointPos.x = (jointPos.x + 1000)/2;
-      jointPos.y = (jointPos.y - 570)/(-1.75);
+      if(jointPos.x!=0){
+        jointPos.x = (jointPos.x + 600)/2;
+        jointPos.y = (jointPos.y - 400)/(-1.75);
+      }
+      else{
+        kinect.getCoM(userId, position);
+        kinect.convertRealWorldToProjective(position, position);
+          
+        jointPos.x = position.x*reScale;
+        jointPos.y = position.y*reScale;
+      }
       
       for ( int h=0; h<20; h++){
         translate(0,-move);
@@ -177,7 +170,7 @@ void draw(){
         stroke(c);
         line(jointPos.x,jointPos.y - move,random(width,width+50),random(-50,height+50));
       }
-      
+      }
        if (kinect.getNumberOfUsers() > 0) { 
     
         p.x=0;
@@ -307,7 +300,8 @@ void draw(){
 
 void onNewUser(SimpleOpenNI curContext, int userId)
 {
-  if(part==1 || part==2){curContext.startTrackingSkeleton(userId);}
+  curContext.startTrackingSkeleton(userId);
+  println("looking for skeleton");
 }
 
 
@@ -325,6 +319,12 @@ void keyPressed()
     break;
   case 'a':
     maxValue -= 100;
+    break;
+  case '+':
+    part ++;
+    break;
+  case '-':
+    part --;
     break;
   }
   println("maxValue: " + maxValue);
