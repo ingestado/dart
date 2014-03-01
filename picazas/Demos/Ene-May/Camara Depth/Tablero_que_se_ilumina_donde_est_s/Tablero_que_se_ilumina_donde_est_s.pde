@@ -94,9 +94,9 @@ void draw(){
     }
   }
   for(int u=0; u<60; u++){act[u]=0;}
-  /*translate(0, (height-kinectHeight*reScale)/2);
+  translate(0, (height-kinectHeight*reScale)/2);
   scale(reScale);
-  image(cam,0,0);*/
+  image(cam,0,0);
 }
 
 void keyPressed(){

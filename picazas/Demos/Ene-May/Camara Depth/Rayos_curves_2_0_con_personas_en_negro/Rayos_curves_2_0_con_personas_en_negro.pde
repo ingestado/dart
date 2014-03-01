@@ -69,7 +69,7 @@ void draw(){
     cuenta++;
   }*/
   
-    fill(0,0,0,50);
+    fill(0,0,0,30);
     rect(-1,-1,width+1,height+1);
     
    // if(act==1){

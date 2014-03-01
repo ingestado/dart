@@ -108,28 +108,6 @@ void draw(){
   
   for( int u=0; u<14; u++){
     image(square,pos[u][0],pos[u][1]);
-     //drawSquare(pos[u][0],pos[u][1],width/7,width/7);
   }
 }
 
-/*void drawSquare (int x, int y, int w, int h){
-  int [] square = new int [4];
-  for(int z=0; z<20; z++){
-    square[0] = x;
-    square[1] = y + (h/2) - (z*h/20);
-    square[2] = x+w;
-    square[3] = y + (h/2);
-    fill(255,255,255,15);
-    noStroke();
-    rectMode(CORNERS);
-    rect(square[0],square[1],square[2],square[3]);
-    square[0] = x;
-    square[1] = y + (h/2);
-    square[2] = x+w;
-    square[3] = y + (h/2) + (z*h/20);
-    fill(255,255,255,15);
-    noStroke();
-    rectMode(CORNERS);
-    rect(square[0],square[1],square[2],square[3]);
-  }
-}*/
