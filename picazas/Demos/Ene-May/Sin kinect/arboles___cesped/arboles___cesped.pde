@@ -2,9 +2,9 @@
 float s = 0; //Separación entre hojas de cesped
 int total = 400;
 int xc = 0;
-float[][] coordI = new float [400][2];
-float[][] coordF = new float [400][2];
-float[][] coordP = new float [400][2];
+float[][] coordI = new float [400][2];  //Coordenadas iniciales {cesped}{x,y}
+float[][] coordF = new float [400][2];  //Coordenadas finales {cesped}{x,y}
+float[][] coordP = new float [400][2];  //Coordenadas del punto {cesped}{x,y}
 float[] aleatorio = new float [400];
 int[][] x = new int[6][65];
 int[][] y = new int[6][65];
