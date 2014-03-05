@@ -25,12 +25,12 @@ void setup(){
   kinect.setMirror(true);
 }
 
-void draw(){print("W");
+void draw(){
   
   kinect.update();
-  IntVector userList = new IntVector();
-  kinect.getUsers(userList);
-  
+  int[] userMap = kinect.userMap(); 
+  int[] userList = kinect.getUsers();
+
   fill(0);
   rect(0,0,width,height);
   stroke(255);
@@ -41,8 +41,8 @@ void draw(){print("W");
   line(5*width/7,0,5*width/7,height);
   line(6*width/7,0,6*width/7,height);
   
-  for (int i=0; i<userList.size(); i++){
-    int userId = userList.get(i); //getting user data
+  for (int i=0; i<userList.length; i++){
+    int userId = userList[i]; //getting user data
     kinect.getCoM(userId, position);
     kinect.convertRealWorldToProjective(position, position);
       

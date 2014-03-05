@@ -2,15 +2,10 @@
 import SimpleOpenNI.*;
 SimpleOpenNI kinect;
 
-PVector position = new PVector();
-PVector jointPos = new PVector(0,0,0);
 PVector min = new PVector(0,0,0);
 PVector max = new PVector(0,0,0);
-int top = 0;
-int act = 0;
 int kinectWidth = 640;
 int kinectHeight = 480;
-int maxValue = 2500;
 float reScale;
 int clickedDepth,clickPosition;
 
@@ -25,7 +20,7 @@ void setup(){
   kinect.setMirror(true);
 }
 
-void draw(){
+void draw(){ print("X");
   background(0);
   min.x = width;
   min.y = height;
@@ -72,24 +67,7 @@ void draw(){
     line(min.x,min.y,min.x,max.y);
     line(min.x,min.y,max.x,min.y);
     line(max.x,min.y,max.x,max.y);
-    /*noFill();
-    rect(min.x,min.y,max.x,max.y);*/
     println("coor: " + min.x + " , " + min.y + " , " + max.x + " , " + max.y );
-}
-
-
-void keyPressed(){
-  
-  println("MaxValue: " + maxValue);
-  switch(key)
-  {
-  case 'q':
-    maxValue+=100;
-    break;
-  case 'a':
-    maxValue-=100;
-    break;
-  }  
 }
 
 void mousePressed(){
